@@ -1,18 +1,120 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Celular Spot HN - Sitio en construcción</title>
+  <title>Celular Spot HN</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <style>
+    .hidden { display: none; }
+    .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; z-index: 50; }
+    .modal-content { background: white; padding: 20px; border-radius: 10px; max-width: 600px; width: 100%; }
+  </style>
 </head>
-<body class="bg-gray-100 flex items-center justify-center h-screen">
-  <div class="text-center">
-    <h1 class="text-4xl font-bold text-blue-600 mb-4">Celular Spot HN</h1>
-    <p class="text-lg">Estamos preparando tu tienda online con los mejores productos 🔧</p>
-    <p class="text-sm text-gray-500 mt-2">Vuelve pronto o contáctanos por WhatsApp</p>
-    <a href="https://wa.me/50494201459" class="mt-4 inline-block bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">Escríbenos</a>
-  </div>
+<body class="bg-gray-100">
+  <header class="bg-white shadow p-4 flex justify-between items-center sticky top-0 z-30">
+    <h1 class="text-xl font-bold text-blue-600">Celular Spot HN</h1>
+    <a href="https://wa.me/50494201459" class="bg-green-500 text-white px-3 py-1 rounded">WhatsApp</a>
+  </header>
+
+  <main class="max-w-7xl mx-auto p-4">
+    <nav class="flex gap-4 mb-6">
+      <button class="filter-btn" data-filter="all">Todos</button>
+      <button class="filter-btn" data-filter="celulares">Celulares</button>
+      <button class="filter-btn" data-filter="accesorios">Accesorios</button>
+      <button class="filter-btn" data-filter="maquillaje">Maquillaje</button>
+      <button class="filter-btn" data-filter="otros">Recomendados</button>
+    </nav>
+
+    <input id="search" type="text" placeholder="Buscar producto..." class="border px-4 py-2 mb-6 w-full rounded" />
+
+    <div id="productos" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+      <!-- Productos se insertan aquí por JavaScript -->
+    </div>
+
+    <div id="modal" class="modal hidden">
+      <div class="modal-content">
+        <button onclick="document.getElementById('modal').classList.add('hidden')" class="float-right text-red-500">X</button>
+        <h2 id="modal-title" class="text-xl font-bold mb-2"></h2>
+        <div id="modal-images" class="flex gap-2 mb-2"></div>
+        <p id="modal-desc" class="mb-2"></p>
+        <a id="modal-whatsapp" href="#" target="_blank" class="bg-green-500 text-white px-4 py-2 rounded block text-center">Comprar por WhatsApp</a>
+      </div>
+    </div>
+
+    <section class="mt-10 p-6 bg-white rounded shadow">
+      <h3 class="text-xl font-semibold mb-4">Preguntas frecuentes</h3>
+      <ul class="space-y-2 text-gray-700">
+        <li><strong>¿Cómo se paga?</strong> Por transferencia bancaria.</li>
+        <li><strong>¿Cómo se entrega?</strong> Por Cargo Express a todo Honduras.</li>
+        <li><strong>¿Cuánto tarda?</strong> 1 a 3 días hábiles.</li>
+        <li><strong>¿Más info?</strong> Usa el botón de WhatsApp para asistencia personalizada.</li>
+      </ul>
+    </section>
+  </main>
+  <script>
+    const productos = [
+      {
+        nombre: "iPhone 15 Pro",
+        categoria: "celulares",
+        precio: "L 18,500",
+        desc: "Pantalla OLED 6.1\", A17 Pro, 128GB, cámara triple, Face ID.",
+        imagenes: [
+          "https://m.media-amazon.com/images/I/71v2jVh6nIL._AC_SL1500_.jpg",
+          "https://m.media-amazon.com/images/I/81fxjeu8fdL._AC_SL1500_.jpg",
+          "https://m.media-amazon.com/images/I/71rJ7ZpFV1L._AC_SL1500_.jpg"
+        ]
+      },
+      {
+        nombre: "Cargador Inalámbrico 15W",
+        categoria: "accesorios",
+        precio: "L 399",
+        desc: "Carga rápida universal, compatible con iPhone y Android.",
+        imagenes: [
+          "https://m.media-amazon.com/images/I/61CJxkYo8wL._AC_SL1500_.jpg",
+          "https://m.media-amazon.com/images/I/61ldmZQkGcL._AC_SL1500_.jpg",
+          "https://m.media-amazon.com/images/I/6169W3BkRML._AC_SL1500_.jpg"
+        ]
+      }
+      // Puedes seguir agregando más productos aquí...
+    ];
+
+    const contenedor = document.getElementById('productos');
+    productos.forEach(p => {
+      const card = document.createElement('div');
+      card.className = `producto ${p.categoria} bg-white p-4 rounded shadow`;
+      card.innerHTML = `
+        <img src="${p.imagenes[0]}" class="h-40 object-contain w-full mb-2">
+        <h4 class="font-semibold">${p.nombre}</h4>
+        <p class="text-blue-600 font-bold">${p.precio}</p>
+        <button class="mt-2 text-sm text-white bg-blue-500 px-3 py-1 rounded" onclick='verDetalles(${JSON.stringify(p)})'>Ver detalles</button>
+      `;
+      contenedor.appendChild(card);
+    });
+
+    function verDetalles(p) {
+      document.getElementById('modal-title').textContent = p.nombre;
+      document.getElementById('modal-desc').textContent = p.desc;
+      document.getElementById('modal-images').innerHTML = p.imagenes.map(src => `<img src="${src}" class="h-20">`).join("");
+      document.getElementById('modal-whatsapp').href = `https://wa.me/50494201459?text=Hola,%20quiero%20comprar%20${encodeURIComponent(p.nombre)}`;
+      document.getElementById('modal').classList.remove('hidden');
+    }
+
+    document.getElementById('search').addEventListener('input', e => {
+      const val = e.target.value.toLowerCase();
+      document.querySelectorAll('.producto').forEach(el => {
+        el.classList.toggle('hidden', !el.textContent.toLowerCase().includes(val));
+      });
+    });
+
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const f = btn.dataset.filter;
+        document.querySelectorAll('.producto').forEach(el => {
+          el.classList.toggle('hidden', f !== 'all' && !el.classList.contains(f));
+        });
+      });
+    });
+  </script>
 </body>
 </html>
