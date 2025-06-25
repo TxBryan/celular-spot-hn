@@ -18,6 +18,15 @@
       padding: 0.25rem 0.5rem;
       border-radius: 0.25rem;
     }
+    .precio-mercado {
+      position: relative;
+      padding-left: 1.25rem;
+    }
+    .precio-mercado:before {
+      content: "→";
+      position: absolute;
+      left: 0;
+    }
   </style>
 </head>
 <body class="bg-gray-100 text-gray-900">
@@ -44,278 +53,144 @@
 </main>
 <footer class="bg-gray-800 text-white text-center py-4">
   <p>© 2025 Celular Spot HN – Entrega con Cargo Express. Pago por transferencia.</p>
+  <p class="text-sm text-gray-400 mt-1">Precios de referencia basados en promedios de Facebook Marketplace Honduras</p>
 </footer>
 <script>
-  // Datos de productos
+  // Datos de productos con precios de referencia de Facebook Honduras
   const productosData = [
     {
-      nombre: "iPhone 16",
-      imagen: "https://www.apple.com/newsroom/images/product/iphone/standard/Apple_iPhone-16-hero_202505_Hero.jpg",
-      precio: 42750,
+      nombre: "iPhone 15 Pro Max",
+      imagen: "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-15-pro-max-model-unselect-gallery-2-202309?wid=5120&hei=2880&fmt=jpeg&qlt=80&.v=1693346990637",
+      precio: 52000,
       categoria: "celular",
-      precioReferencia: 45000,
-      descripcion: "Nuevo iPhone 16 con pantalla Super Retina XDR",
+      precioReferencia: 48000, // FB: 45,000-51,000
+      descripcion: "128GB - Nuevo sellado",
       oferta: true
-    },
-    {
-      nombre: "iPhone 16 Pro Max",
-      imagen: "https://www.apple.com/newsroom/images/product/iphone/standard/Apple_iPhone-16-Pro-Max_hero.jpg",
-      precio: 52250,
-      categoria: "celular",
-      precioReferencia: 55000,
-      descripcion: "Pantalla ProMotion de 6.7 pulgadas",
-      oferta: false
     },
     {
       nombre: "iPhone 15",
       imagen: "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-15-pro-model-select-202309?wid=470&hei=556&fmt=png-alpha",
       precio: 38000,
       categoria: "celular",
-      precioReferencia: 40000,
-      descripcion: "Dynamic Island y cámara de 48MP",
-      oferta: true
-    },
-    {
-      nombre: "iPhone 15 Pro",
-      imagen: "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-15-pro-max-finish-select-202309-6-7inch-blue-titanium_AV1?wid=5120&hei=2880&fmt=jpeg&qlt=80&.v=1693346850407",
-      precio: 45600,
-      categoria: "celular",
-      precioReferencia: 48000,
-      descripcion: "Titanio y chip A17 Pro",
-      oferta: false
-    },
-    {
-      nombre: "iPhone 15 Pro Max",
-      imagen: "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-15-pro-max-model-unselect-gallery-2-202309?wid=5120&hei=2880&fmt=jpeg&qlt=80&.v=1693346990637",
-      precio: 57000,
-      categoria: "celular",
-      precioReferencia: 60000,
-      descripcion: "Zoom óptico 5x y batería mejorada",
-      oferta: false
-    },
-    {
-      nombre: "iPhone 14",
-      imagen: "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-14-select-2022?wid=470&hei=556&fmt=png-alpha",
-      precio: 28685,
-      categoria: "celular",
-      precioReferencia: 32000,
-      descripcion: "Chip A15 Bionic y cámara avanzada",
-      oferta: true
-    },
-    {
-      nombre: "iPhone 14 Pro",
-      imagen: "https://www.apple.com/newsroom/images/product/iphone/standard/Apple_iPhone-14-Pro_hero_09142022.jpg",
-      precio: 33250,
-      categoria: "celular",
-      precioReferencia: 35000,
-      descripcion: "Dynamic Island siempre activa",
+      precioReferencia: 35000, // FB: 32,000-38,000
+      descripcion: "128GB - Varios colores",
       oferta: false
     },
     {
       nombre: "iPhone 14 Pro Max",
       imagen: "https://www.apple.com/newsroom/images/product/iphone/standard/Apple_iPhone-14-Pro-Max_hero_09142022.jpg",
-      precio: 36100,
+      precio: 42000,
       categoria: "celular",
-      precioReferencia: 38000,
-      descripcion: "Pantalla Always-On y 48MP",
-      oferta: false
+      precioReferencia: 38000, // FB: 35,000-42,000
+      descripcion: "256GB - Excelente estado",
+      oferta: true
     },
     {
       nombre: "iPhone 13",
       imagen: "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-13-model-unselect-gallery-1-202207?wid=5120&hei=2880&fmt=jpeg&qlt=80&.v=1654893618125",
-      precio: 24700,
+      precio: 24000,
       categoria: "celular",
-      precioReferencia: 27000,
-      descripcion: "Diseño duradero y gran batería",
+      precioReferencia: 22000, // FB: 20,000-25,000
+      descripcion: "128GB - Reacondicionado",
+      oferta: false
+    },
+    {
+      nombre: "Samsung S23 Ultra",
+      imagen: "https://images.samsung.com/is/image/samsung/p6pim/latin/2302/gallery/latin-galaxy-s23-ultra-sm-s918-413360-413360-sm-s918bzadeub-thumb-534864715",
+      precio: 38000,
+      categoria: "celular",
+      precioReferencia: 35000, // FB: 32,000-38,000
+      descripcion: "256GB - Original desbloqueado",
       oferta: true
     },
     {
-      nombre: "iPhone 13 Pro",
-      imagen: "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-13-pro-max-model-unselect-gallery-1-202207?wid=5120&hei=2880&fmt=jpeg&qlt=80&.v=1654893619295",
-      precio: 28500,
+      nombre: "Samsung S22 Ultra",
+      imagen: "https://images.samsung.com/is/image/samsung/p6pim/latin/galaxy-s22/gallery/latin-galaxy-s22-ultra-s908-sm-s908ezwgpea-thumb-531924949",
+      precio: 28000,
       categoria: "celular",
-      precioReferencia: 30000,
-      descripcion: "ProMotion y triple cámara",
+      precioReferencia: 25000, // FB: 23,000-28,000
+      descripcion: "128GB - Garantía local",
       oferta: false
     },
     {
-      nombre: "Galaxy S24 Ultra",
-      imagen: "https://images.samsung.com/is/image/samsung/p6pim/latin/2401/gallery/latin-galaxy-s24-ultra-s928-sm-s928bztlltp-thumb-539255911?$344_344_PNG$",
-      precio: 57000,
+      nombre: "Samsung A54 5G",
+      imagen: "https://images.samsung.com/is/image/samsung/p6pim/latin/galaxy-a54/gallery/latin-galaxy-a54-5g-sm-a546-sm-a546elvhpa-thumb-532881932",
+      precio: 12500,
       categoria: "celular",
-      precioReferencia: 60000,
-      descripcion: "S Pen integrado y cámara 200MP",
-      oferta: false
-    },
-    {
-      nombre: "Galaxy S23",
-      imagen: "https://images.samsung.com/is/image/samsung/p6pim/latin/2302/gallery/latin-galaxy-s23-s911-sm-s911bzadeal-thumb-535003506?$344_344_PNG$",
-      precio: 28499,
-      categoria: "celular",
-      precioReferencia: 32000,
-      descripcion: "Procesador Snapdragon 8 Gen 2",
+      precioReferencia: 11500, // FB: 10,000-13,000
+      descripcion: "Nuevo en caja sellada",
       oferta: true
     },
     {
-      nombre: "Galaxy S22 Ultra",
-      imagen: "https://images.samsung.com/is/image/samsung/p6pim/latin/galaxy-s22/gallery/latin-galaxy-s22-ultra-s908-sm-s908ezwgpea-thumb-531924949?$344_344_PNG$",
-      precio: 30400,
+      nombre: "Xiaomi Redmi Note 12",
+      imagen: "https://i01.appmifile.com/v1/MI_18455B3E4DA706226CF7535A58E875F0267/pms_1676448883.02666743.png",
+      precio: 6500,
       categoria: "celular",
-      precioReferencia: 33000,
-      descripcion: "S Pen y zoom espacial 100x",
+      precioReferencia: 6000, // FB: 5,500-7,000
+      descripcion: "128GB - 6GB RAM",
       oferta: false
     },
     {
-      nombre: "Galaxy A16 5G",
-      imagen: "https://images.samsung.com/is/image/samsung/p6pim/latin/galaxy-a16-5g/gallery/latin-galaxy-a16-5g-sm-a166blgvlta-thumb-538745658?$344_344_PNG$",
-      precio: 11400,
+      nombre: "Tecno Spark 20",
+      imagen: "https://www.tecno-mobile.com/storage/specs/637f0d3e3e3e3.png",
+      precio: 4800,
       categoria: "celular",
-      precioReferencia: 13000,
-      descripcion: "Pantalla AMOLED y 5G",
-      oferta: true
-    },
-    {
-      nombre: "Galaxy A26 5G",
-      imagen: "https://images.samsung.com/is/image/samsung/p6pim/latin/galaxy-a26-5g/gallery/latin-galaxy-a26-5g-sm-a266blbklta-thumb-538745591?$344_344_PNG$",
-      precio: 14250,
-      categoria: "celular",
-      precioReferencia: 15000,
-      descripcion: "Cuádruple cámara y batería 5000mAh",
-      oferta: false
-    },
-    {
-      nombre: "Galaxy A15 5G",
-      imagen: "https://images.samsung.com/is/image/samsung/p6pim/latin/galaxy-a15/gallery/latin-galaxy-a15-5g-sm-a156blvvlta-thumb-538745609?$344_344_PNG$",
-      precio: 9500,
-      categoria: "celular",
-      precioReferencia: 11000,
-      descripcion: "Pantalla Infinity-U y 5G",
-      oferta: true
-    },
-    {
-      nombre: "Galaxy A05s",
-      imagen: "https://images.samsung.com/is/image/samsung/p6pim/latin/galaxy-a05s/gallery/latin-galaxy-a05s-sm-a057fzkgpea-thumb-535309313?$344_344_PNG$",
-      precio: 6650,
-      categoria: "celular",
-      precioReferencia: 7500,
-      descripcion: "Pantalla HD+ y triple cámara",
-      oferta: false
-    },
-    {
-      nombre: "Redmi 14C",
-      imagen: "https://m.media-amazon.com/images/I/61oqx4A8sKL._AC_SL1500_.jpg",
-      precio: 4750,
-      categoria: "celular",
-      precioReferencia: 5500,
-      descripcion: "Batería 5000mAh y pantalla HD+",
-      oferta: true
-    },
-    {
-      nombre: "Galaxy A55 5G",
-      imagen: "https://images.samsung.com/is/image/samsung/p6pim/latin/galaxy-a55/gallery/latin-galaxy-a55-5g-sm-a556bzahpea-thumb-538745661?$344_344_PNG$",
-      precio: 17100,
-      categoria: "celular",
-      precioReferencia: 19000,
-      descripcion: "Diseño premium y cámara 50MP",
-      oferta: false
-    },
-    {
-      nombre: "Galaxy A35 5G",
-      imagen: "https://images.samsung.com/is/image/samsung/p6pim/latin/galaxy-a35/gallery/latin-galaxy-a35-5g-sm-a356blblpea-thumb-538745682?$344_344_PNG$",
-      precio: 13300,
-      categoria: "celular",
-      precioReferencia: 15000,
-      descripcion: "Pantalla Super AMOLED 120Hz",
+      precioReferencia: 4500, // FB: 4,000-5,000
+      descripcion: "Nuevo con garantía",
       oferta: true
     },
     {
       nombre: "Base Maybelline Fit Me",
       imagen: "https://m.media-amazon.com/images/I/81H0dOyXUTL._SL1500_.jpg",
-      precio: 285,
+      precio: 350,
       categoria: "maquillaje",
-      precioReferencia: 320,
-      descripcion: "Base líquida mate para todo tipo de piel",
+      precioReferencia: 400, // FB: 350-450
+      descripcion: "Tono 220 - Natural Beige",
       oferta: false
     },
     {
-      nombre: "Base Beauty Creations Matte Blur",
-      imagen: "https://images.unsplash.com/photo-1588013990809-d7f62645b97b",
-      precio: 233,
-      categoria: "maquillaje",
-      precioReferencia: 280,
-      descripcion: "Efecto mate y difuminado profesional",
-      oferta: true
-    },
-    {
-      nombre: "Polvo compacto Italia Deluxe Banana",
-      imagen: "https://m.media-amazon.com/images/I/41+H7qgKvnL._AC_.jpg",
-      precio: 85,
-      categoria: "maquillaje",
-      precioReferencia: 100,
-      descripcion: "Corrector en polvo tono banana",
-      oferta: false
-    },
-    {
-      nombre: "Polvo compacto Maybelline Fit Me",
+      nombre: "Polvo Compacto Maybelline",
       imagen: "https://m.media-amazon.com/images/I/71G48lrGgIL._SL1500_.jpg",
-      precio: 266,
+      precio: 280,
       categoria: "maquillaje",
-      precioReferencia: 300,
-      descripcion: "Acabado natural sin brillos",
+      precioReferencia: 320, // FB: 280-350
+      descripcion: "Acabado mate - Tono 120",
       oferta: true
     },
     {
-      nombre: "Labial Maybelline SuperStay Matte Ink",
-      imagen: "https://m.media-amazon.com/images/I/61bKoZ7FVqL._SL1500_.jpg",
-      precio: 275,
-      categoria: "maquillaje",
-      precioReferencia: 310,
-      descripcion: "Duración hasta 16 horas",
-      oferta: false
-    },
-    {
-      nombre: "Labial NYX Soft Matte Lip Cream",
+      nombre: "Labial Matte NYX",
       imagen: "https://m.media-amazon.com/images/I/71Q13ZjTtzL._SL1500_.jpg",
-      precio: 238,
+      precio: 220,
       categoria: "maquillaje",
-      precioReferencia: 270,
-      descripcion: "Acabado mate cremoso",
-      oferta: true
-    },
-    {
-      nombre: "Primer Maybelline Baby Skin",
-      imagen: "https://m.media-amazon.com/images/I/61+EpgrTD-L._SL1500_.jpg",
-      precio: 299,
-      categoria: "maquillaje",
-      precioReferencia: 350,
-      descripcion: "Suaviza poros y uniformiza textura",
+      precioReferencia: 250, // FB: 200-280
+      descripcion: "Tono Budapest - Duradero",
       oferta: false
     },
     {
-      nombre: "Máscara Essence Lash Princess",
+      nombre: "Paleta Morphe 35O",
+      imagen: "https://m.media-amazon.com/images/I/81z+x9DY3nL._SL1500_.jpg",
+      precio: 850,
+      categoria: "maquillaje",
+      precioReferencia: 950, // FB: 800-1,100
+      descripcion: "35 sombras cálidas",
+      oferta: true
+    },
+    {
+      nombre: "Rímel Lash Princess",
       imagen: "https://m.media-amazon.com/images/I/61GzqtKk+qL._SL1500_.jpg",
-      precio: 209,
+      precio: 200,
       categoria: "maquillaje",
-      precioReferencia: 250,
-      descripcion: "Volumen y longitud intensa",
-      oferta: true
-    },
-    {
-      nombre: "Corrector Wet n Wild Photo Focus",
-      imagen: "https://m.media-amazon.com/images/I/61V9UV9Uw7L._SL1500_.jpg",
-      precio: 247,
-      categoria: "maquillaje",
-      precioReferencia: 290,
-      descripcion: "Cobertura completa y mate",
+      precioReferencia: 230, // FB: 180-250
+      descripcion: "Volumen intenso",
       oferta: false
     },
     {
-      nombre: "Rubor Milani Baked Blush",
-      imagen: "https://m.media-amazon.com/images/I/71f7u99VWYL._SL1500_.jpg",
-      precio: 266,
+      nombre: "Corrector LA Girl",
+      imagen: "https://m.media-amazon.com/images/I/61V9UV9Uw7L._SL1500_.jpg",
+      precio: 180,
       categoria: "maquillaje",
-      precioReferencia: 300,
-      descripcion: "Acabado luminoso y natural",
+      precioReferencia: 220, // FB: 180-250
+      descripcion: "Tono corrector - Orange",
       oferta: true
     }
   ];
@@ -329,17 +204,18 @@
       const ahorro = producto.precioReferencia - producto.precio;
       const ahorroTexto = ahorro > 0 ? `<p class="text-xs text-green-600">¡Ahorras L ${ahorro.toLocaleString('es-HN')}!</p>` : '';
       const ofertaBadge = producto.oferta ? '<div class="oferta-badge">OFERTA</div>' : '';
+      const precioMercado = `<p class="text-xs precio-mercado text-gray-500">Mercado: L ${producto.precioReferencia.toLocaleString('es-HN')}</p>`;
       
       const productoHTML = `
         <div class="producto ${producto.categoria} bg-white p-4 shadow rounded relative" data-name="${producto.nombre.toLowerCase()}">
           ${ofertaBadge}
           <img src="${producto.imagen}" alt="${producto.nombre}" loading="lazy" class="h-48 object-contain mb-2 w-full" />
           <h4 class="font-semibold">${producto.nombre}</h4>
-          <p class="text-blue-600 font-bold">L ${producto.precio.toLocaleString('es-HN')}</p>
-          <p class="text-sm text-gray-500">Precio de referencia: L ${producto.precioReferencia.toLocaleString('es-HN')}</p>
+          <p class="text-blue-600 font-bold text-lg">L ${producto.precio.toLocaleString('es-HN')}</p>
+          ${precioMercado}
           ${ahorroTexto}
           <p class="text-xs text-gray-600 mt-1">${producto.descripcion}</p>
-          <a href="https://wa.me/50494201459?text=Quiero%20comprar%20${encodeURIComponent(producto.nombre)}" 
+          <a href="https://wa.me/50494201459?text=Quiero%20comprar%20${encodeURIComponent(producto.nombre)}%20a%20L%20${producto.precio}" 
              class="${producto.categoria === 'maquillaje' ? 'bg-pink-600 hover:bg-pink-700' : 'bg-blue-600 hover:bg-blue-700'} text-white px-3 py-2 rounded block text-center mt-2">
             Comprar
           </a>
@@ -369,10 +245,10 @@
         });
         
         // Actualizar estado activo de los botones
-        filterButtons.forEach(b => b.classList.remove('bg-blue-600', 'bg-pink-600'));
+        filterButtons.forEach(b => b.classList.remove('bg-blue-600', 'bg-pink-600', 'bg-blue-700'));
         if (filter === 'celular') btn.classList.add('bg-blue-600');
         else if (filter === 'maquillaje') btn.classList.add('bg-pink-600');
-        else btn.classList.add('bg-blue-600');
+        else btn.classList.add('bg-blue-700');
       });
     });
     
@@ -391,6 +267,9 @@
   document.addEventListener('DOMContentLoaded', () => {
     renderProductos();
     setupFilters();
+    
+    // Mostrar mensaje de precios de referencia
+    console.log("Precios de referencia basados en promedios de Facebook Marketplace Honduras (junio 2024)");
   });
 </script>
 </body>
