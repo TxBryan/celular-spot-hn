@@ -27,6 +27,12 @@
       position: absolute;
       left: 0;
     }
+    .producto img {
+      width: 100%;
+      height: 200px;
+      object-fit: contain;
+      margin-bottom: 1rem;
+    }
   </style>
 </head>
 <body class="bg-gray-100 text-gray-900">
@@ -63,7 +69,7 @@
       imagen: "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-15-pro-max-model-unselect-gallery-2-202309?wid=5120&hei=2880&fmt=jpeg&qlt=80&.v=1693346990637",
       precio: 52000,
       categoria: "celular",
-      precioReferencia: 48000, // FB: 45,000-51,000
+      precioReferencia: 48000,
       descripcion: "128GB - Nuevo sellado",
       oferta: true
     },
@@ -72,7 +78,7 @@
       imagen: "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-15-pro-model-select-202309?wid=470&hei=556&fmt=png-alpha",
       precio: 38000,
       categoria: "celular",
-      precioReferencia: 35000, // FB: 32,000-38,000
+      precioReferencia: 35000,
       descripcion: "128GB - Varios colores",
       oferta: false
     },
@@ -81,7 +87,7 @@
       imagen: "https://www.apple.com/newsroom/images/product/iphone/standard/Apple_iPhone-14-Pro-Max_hero_09142022.jpg",
       precio: 42000,
       categoria: "celular",
-      precioReferencia: 38000, // FB: 35,000-42,000
+      precioReferencia: 38000,
       descripcion: "256GB - Excelente estado",
       oferta: true
     },
@@ -90,7 +96,7 @@
       imagen: "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-13-model-unselect-gallery-1-202207?wid=5120&hei=2880&fmt=jpeg&qlt=80&.v=1654893618125",
       precio: 24000,
       categoria: "celular",
-      precioReferencia: 22000, // FB: 20,000-25,000
+      precioReferencia: 22000,
       descripcion: "128GB - Reacondicionado",
       oferta: false
     },
@@ -99,7 +105,7 @@
       imagen: "https://images.samsung.com/is/image/samsung/p6pim/latin/2302/gallery/latin-galaxy-s23-ultra-sm-s918-413360-413360-sm-s918bzadeub-thumb-534864715",
       precio: 38000,
       categoria: "celular",
-      precioReferencia: 35000, // FB: 32,000-38,000
+      precioReferencia: 35000,
       descripcion: "256GB - Original desbloqueado",
       oferta: true
     },
@@ -108,7 +114,7 @@
       imagen: "https://images.samsung.com/is/image/samsung/p6pim/latin/galaxy-s22/gallery/latin-galaxy-s22-ultra-s908-sm-s908ezwgpea-thumb-531924949",
       precio: 28000,
       categoria: "celular",
-      precioReferencia: 25000, // FB: 23,000-28,000
+      precioReferencia: 25000,
       descripcion: "128GB - Garantía local",
       oferta: false
     },
@@ -117,7 +123,7 @@
       imagen: "https://images.samsung.com/is/image/samsung/p6pim/latin/galaxy-a54/gallery/latin-galaxy-a54-5g-sm-a546-sm-a546elvhpa-thumb-532881932",
       precio: 12500,
       categoria: "celular",
-      precioReferencia: 11500, // FB: 10,000-13,000
+      precioReferencia: 11500,
       descripcion: "Nuevo en caja sellada",
       oferta: true
     },
@@ -126,25 +132,16 @@
       imagen: "https://i01.appmifile.com/v1/MI_18455B3E4DA706226CF7535A58E875F0267/pms_1676448883.02666743.png",
       precio: 6500,
       categoria: "celular",
-      precioReferencia: 6000, // FB: 5,500-7,000
+      precioReferencia: 6000,
       descripcion: "128GB - 6GB RAM",
       oferta: false
-    },
-    {
-      nombre: "Tecno Spark 20",
-      imagen: "https://www.tecno-mobile.com/storage/specs/637f0d3e3e3e3.png",
-      precio: 4800,
-      categoria: "celular",
-      precioReferencia: 4500, // FB: 4,000-5,000
-      descripcion: "Nuevo con garantía",
-      oferta: true
     },
     {
       nombre: "Base Maybelline Fit Me",
       imagen: "https://m.media-amazon.com/images/I/81H0dOyXUTL._SL1500_.jpg",
       precio: 350,
       categoria: "maquillaje",
-      precioReferencia: 400, // FB: 350-450
+      precioReferencia: 400,
       descripcion: "Tono 220 - Natural Beige",
       oferta: false
     },
@@ -153,7 +150,7 @@
       imagen: "https://m.media-amazon.com/images/I/71G48lrGgIL._SL1500_.jpg",
       precio: 280,
       categoria: "maquillaje",
-      precioReferencia: 320, // FB: 280-350
+      precioReferencia: 320,
       descripcion: "Acabado mate - Tono 120",
       oferta: true
     },
@@ -162,36 +159,9 @@
       imagen: "https://m.media-amazon.com/images/I/71Q13ZjTtzL._SL1500_.jpg",
       precio: 220,
       categoria: "maquillaje",
-      precioReferencia: 250, // FB: 200-280
+      precioReferencia: 250,
       descripcion: "Tono Budapest - Duradero",
       oferta: false
-    },
-    {
-      nombre: "Paleta Morphe 35O",
-      imagen: "https://m.media-amazon.com/images/I/81z+x9DY3nL._SL1500_.jpg",
-      precio: 850,
-      categoria: "maquillaje",
-      precioReferencia: 950, // FB: 800-1,100
-      descripcion: "35 sombras cálidas",
-      oferta: true
-    },
-    {
-      nombre: "Rímel Lash Princess",
-      imagen: "https://m.media-amazon.com/images/I/61GzqtKk+qL._SL1500_.jpg",
-      precio: 200,
-      categoria: "maquillaje",
-      precioReferencia: 230, // FB: 180-250
-      descripcion: "Volumen intenso",
-      oferta: false
-    },
-    {
-      nombre: "Corrector LA Girl",
-      imagen: "https://m.media-amazon.com/images/I/61V9UV9Uw7L._SL1500_.jpg",
-      precio: 180,
-      categoria: "maquillaje",
-      precioReferencia: 220, // FB: 180-250
-      descripcion: "Tono corrector - Orange",
-      oferta: true
     }
   ];
 
@@ -209,7 +179,7 @@
       const productoHTML = `
         <div class="producto ${producto.categoria} bg-white p-4 shadow rounded relative" data-name="${producto.nombre.toLowerCase()}">
           ${ofertaBadge}
-          <img src="${producto.imagen}" alt="${producto.nombre}" loading="lazy" class="h-48 object-contain mb-2 w-full" />
+          <img src="${producto.imagen}" alt="${producto.nombre}" loading="lazy" class="mb-2" />
           <h4 class="font-semibold">${producto.nombre}</h4>
           <p class="text-blue-600 font-bold text-lg">L ${producto.precio.toLocaleString('es-HN')}</p>
           ${precioMercado}
@@ -267,9 +237,6 @@
   document.addEventListener('DOMContentLoaded', () => {
     renderProductos();
     setupFilters();
-    
-    // Mostrar mensaje de precios de referencia
-    console.log("Precios de referencia basados en promedios de Facebook Marketplace Honduras (junio 2024)");
   });
 </script>
 </body>
