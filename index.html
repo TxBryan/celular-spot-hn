@@ -27,11 +27,13 @@
       position: absolute;
       left: 0;
     }
-    .producto img {
+    .producto-imagen {
       width: 100%;
       height: 200px;
       object-fit: contain;
       margin-bottom: 1rem;
+      background-color: #f3f4f6;
+      padding: 0.5rem;
     }
   </style>
 </head>
@@ -62,108 +64,94 @@
   <p class="text-sm text-gray-400 mt-1">Precios de referencia basados en promedios de Facebook Marketplace Honduras</p>
 </footer>
 <script>
-  // Datos de productos con precios de referencia de Facebook Honduras
+  // Datos de productos con imágenes locales alternativas
   const productosData = [
     {
+      id: 1,
       nombre: "iPhone 15 Pro Max",
-      imagen: "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-15-pro-max-model-unselect-gallery-2-202309?wid=5120&hei=2880&fmt=jpeg&qlt=80&.v=1693346990637",
+      imagen: "https://www.apple.com/newsroom/images/product/iphone/standard/Apple-iPhone-15-Pro-lineup-hero-230912.jpg.landing-big_2x.jpg",
       precio: 52000,
       categoria: "celular",
       precioReferencia: 48000,
       descripcion: "128GB - Nuevo sellado",
-      oferta: true
+      oferta: true,
+      garantia: "1 año",
+      entrega: "24-48 horas"
     },
     {
+      id: 2,
       nombre: "iPhone 15",
-      imagen: "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-15-pro-model-select-202309?wid=470&hei=556&fmt=png-alpha",
+      imagen: "https://www.apple.com/newsroom/images/product/iphone/standard/Apple-iPhone-15-lineup-hero-230912.jpg.landing-big_2x.jpg",
       precio: 38000,
       categoria: "celular",
       precioReferencia: 35000,
       descripcion: "128GB - Varios colores",
-      oferta: false
+      oferta: false,
+      garantia: "1 año",
+      entrega: "24-48 horas"
     },
     {
-      nombre: "iPhone 14 Pro Max",
-      imagen: "https://www.apple.com/newsroom/images/product/iphone/standard/Apple_iPhone-14-Pro-Max_hero_09142022.jpg",
-      precio: 42000,
-      categoria: "celular",
-      precioReferencia: 38000,
-      descripcion: "256GB - Excelente estado",
-      oferta: true
-    },
-    {
-      nombre: "iPhone 13",
-      imagen: "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-13-model-unselect-gallery-1-202207?wid=5120&hei=2880&fmt=jpeg&qlt=80&.v=1654893618125",
-      precio: 24000,
-      categoria: "celular",
-      precioReferencia: 22000,
-      descripcion: "128GB - Reacondicionado",
-      oferta: false
-    },
-    {
+      id: 3,
       nombre: "Samsung S23 Ultra",
       imagen: "https://images.samsung.com/is/image/samsung/p6pim/latin/2302/gallery/latin-galaxy-s23-ultra-sm-s918-413360-413360-sm-s918bzadeub-thumb-534864715",
       precio: 38000,
       categoria: "celular",
       precioReferencia: 35000,
       descripcion: "256GB - Original desbloqueado",
-      oferta: true
+      oferta: true,
+      garantia: "6 meses",
+      entrega: "24 horas"
     },
     {
-      nombre: "Samsung S22 Ultra",
-      imagen: "https://images.samsung.com/is/image/samsung/p6pim/latin/galaxy-s22/gallery/latin-galaxy-s22-ultra-s908-sm-s908ezwgpea-thumb-531924949",
-      precio: 28000,
-      categoria: "celular",
-      precioReferencia: 25000,
-      descripcion: "128GB - Garantía local",
-      oferta: false
-    },
-    {
-      nombre: "Samsung A54 5G",
-      imagen: "https://images.samsung.com/is/image/samsung/p6pim/latin/galaxy-a54/gallery/latin-galaxy-a54-5g-sm-a546-sm-a546elvhpa-thumb-532881932",
-      precio: 12500,
-      categoria: "celular",
-      precioReferencia: 11500,
-      descripcion: "Nuevo en caja sellada",
-      oferta: true
-    },
-    {
+      id: 4,
       nombre: "Xiaomi Redmi Note 12",
       imagen: "https://i01.appmifile.com/v1/MI_18455B3E4DA706226CF7535A58E875F0267/pms_1676448883.02666743.png",
       precio: 6500,
       categoria: "celular",
       precioReferencia: 6000,
       descripcion: "128GB - 6GB RAM",
-      oferta: false
+      oferta: false,
+      garantia: "3 meses",
+      entrega: "48 horas"
     },
     {
+      id: 5,
       nombre: "Base Maybelline Fit Me",
-      imagen: "https://m.media-amazon.com/images/I/81H0dOyXUTL._SL1500_.jpg",
+      imagen: "https://www.maybelline.com/-/media/project/loreal/brand-sites/mny/americas/latam/products/face/foundation/fit-me-matte-poreless-foundation/800x800/800x800_fit_me_matte_poreless_foundation_220_natural_beige.jpg",
       precio: 350,
       categoria: "maquillaje",
       precioReferencia: 400,
       descripcion: "Tono 220 - Natural Beige",
-      oferta: false
+      oferta: false,
+      garantia: "No aplica",
+      entrega: "24 horas"
     },
     {
-      nombre: "Polvo Compacto Maybelline",
-      imagen: "https://m.media-amazon.com/images/I/71G48lrGgIL._SL1500_.jpg",
-      precio: 280,
-      categoria: "maquillaje",
-      precioReferencia: 320,
-      descripcion: "Acabado mate - Tono 120",
-      oferta: true
-    },
-    {
+      id: 6,
       nombre: "Labial Matte NYX",
-      imagen: "https://m.media-amazon.com/images/I/71Q13ZjTtzL._SL1500_.jpg",
+      imagen: "https://www.nyxcosmetics.com/dw/image/v2/AANG_PRD/on/demandware.static/-/Sites-nyxusa-master-catalog/default/dw4c1a1b5b/ProductImages/2016/sml_pro_cream_lipstick/sml_pro_cream_lipstick_budapest.jpg?sw=390&sh=390&sm=fit",
       precio: 220,
       categoria: "maquillaje",
       precioReferencia: 250,
       descripcion: "Tono Budapest - Duradero",
-      oferta: false
+      oferta: false,
+      garantia: "No aplica",
+      entrega: "24 horas"
     }
   ];
+
+  // Función para generar mensaje de WhatsApp
+  function generarMensajeWhatsApp(producto) {
+    return `¡Hola! Estoy interesado en comprar el siguiente producto:
+    
+*Producto:* ${producto.nombre}
+*Precio:* L ${producto.precio.toLocaleString('es-HN')}
+*Descripción:* ${producto.descripcion}
+*Garantía:* ${producto.garantia}
+*Tiempo de entrega:* ${producto.entrega}
+
+¿Podrías darme más información?`;
+  }
 
   // Función para renderizar productos
   function renderProductos() {
@@ -179,15 +167,17 @@
       const productoHTML = `
         <div class="producto ${producto.categoria} bg-white p-4 shadow rounded relative" data-name="${producto.nombre.toLowerCase()}">
           ${ofertaBadge}
-          <img src="${producto.imagen}" alt="${producto.nombre}" loading="lazy" class="mb-2" />
+          <img src="${producto.imagen}" alt="${producto.nombre}" loading="lazy" class="producto-imagen" />
           <h4 class="font-semibold">${producto.nombre}</h4>
           <p class="text-blue-600 font-bold text-lg">L ${producto.precio.toLocaleString('es-HN')}</p>
           ${precioMercado}
           ${ahorroTexto}
           <p class="text-xs text-gray-600 mt-1">${producto.descripcion}</p>
-          <a href="https://wa.me/50494201459?text=Quiero%20comprar%20${encodeURIComponent(producto.nombre)}%20a%20L%20${producto.precio}" 
+          <p class="text-xs text-gray-500 mt-1">Garantía: ${producto.garantia}</p>
+          <p class="text-xs text-gray-500">Entrega: ${producto.entrega}</p>
+          <a href="https://wa.me/50494201459?text=${encodeURIComponent(generarMensajeWhatsApp(producto))}" 
              class="${producto.categoria === 'maquillaje' ? 'bg-pink-600 hover:bg-pink-700' : 'bg-blue-600 hover:bg-blue-700'} text-white px-3 py-2 rounded block text-center mt-2">
-            Comprar
+            Consultar por WhatsApp
           </a>
         </div>
       `;
@@ -237,6 +227,13 @@
   document.addEventListener('DOMContentLoaded', () => {
     renderProductos();
     setupFilters();
+    
+    // Verificar si hay errores en las imágenes
+    document.querySelectorAll('img').forEach(img => {
+      img.onerror = function() {
+        this.src = 'https://via.placeholder.com/300x200?text=Imagen+no+disponible';
+      };
+    });
   });
 </script>
 </body>
